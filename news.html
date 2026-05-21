@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻中心滚动新闻_新浪网</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, "Microsoft YaHei", sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .header-top {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #005ea7;
+            margin-right: 15px;
+        }
+
+        .main-container {
+            width: 1200px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .filter-section {
+            padding: 15px 20px;
+            background: #f9f9f9;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .refresh-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            background: #005ea7;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .category-nav {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 20px;
+            background: #fafafa;
+        }
+
+        .category-item {
+            padding: 5px 10px;
+            cursor: pointer;
+            color: #005ea7;
+        }
+
+        .category-item.active {
+            color: #fff;
+            background: #005ea7;
+            border-radius: 3px;
+        }
+
+        .news-list {
+            padding: 0 20px;
+        }
+
+        .news-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-title {
+            flex: 1;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .news-title a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .news-title a:hover {
+            color: #005ea7;
+        }
+
+        .news-time {
+            width: 120px;
+            text-align: right;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer {
+            width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .pagination button {
+            margin: 0 5px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background: #f0f0f0;
+        }
+
+        .pagination button.active {
+            background: #005ea7;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-top">
+            <div class="logo">
+                <img src="//n.sinaimg.cn/default/d3f34f8d/20180417/logo_home_news.gif" alt="新浪新闻">
+            </div>
+            <div class="nav-links">
+                <a href="http://news.sina.com.cn/">新浪新闻</a> |
+                <a href="http://www.sina.com.cn/">新浪首页</a> |
+                <a href="http://news.sina.com.cn/guide/">新浪导航</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="filter-section">
+            <div class="search-controls">
+                最新滚动
+                <select>
+                    <option>按标题</option>
+                    <option>按全文</option>
+                </select>
+                <select>
+                    <option>全部时间</option>
+                    <option>一天内</option>
+                    <option>一周内</option>
+                    <option>一月内</option>
+                </select>
+            </div>
+            <div class="refresh-control">
+                <span id="refresh-countdown">30秒后刷新</span>
+                <button class="refresh-btn">立即刷新</button>
+                <select id="refresh-interval">
+                    <option value="30">30秒</option>
+                    <option value="60">60秒</option>
+                    <option value="90">90秒</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="category-nav">
+            <div class="category-item active">全部</div>
+            <div class="category-item">国内</div>
+            <div class="category-item">国际</div>
+            <div class="category-item">社会</div>
+            <div class="category-item">体育</div>
+            <div class="category-item">娱乐</div>
+            <div class="category-item">军事</div>
+            <div class="category-item">科技</div>
+            <div class="category-item">财经</div>
+            <div class="category-item">股市</div>
+            <div class="category-item">美股</div>
+        </div>
+
+        <div class="news-list">
+            <!-- 示例新闻条目 -->
+            <div class="news-item">
+                <div class="news-title"><a href="#">这是新闻标题示例</a></div>
+                <div class="news-time">2025-01-22 10:30</div>
+            </div>
+            <div class="news-item">
+                <div class="news-title"><a href="#">这是另一条新闻标题</a></div>
+                <div class="news-time">2025-01-22 09:45</div>
+            </div>
+            <div class="news-item">
+                <div class="news-title"><a href="#">又一条新闻标题示例</a></div>
+                <div class="news-time">2025-01-22 08:20</div>
+            </div>
+            <div class="news-item">
+                <div class="news-title"><a href="#">最新的新闻标题</a></div>
+                <div class="news-time">2025-01-22 07:15</div>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <button>&lt;&lt;</button>
+            <button>&lt;</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+            <button>5</button>
+            <button>&gt;</button>
+            <button>&gt;&gt;</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>意见反馈留言板　客服热线：4001102288　欢迎批评指正</p>
+        <p>新浪公司 <a href="http://www.sina.com.cn/intro/copyright.shtml">版权所有</a>　Copyright © 1996-2025 SINA Corporation, All Rights Reserved</p>
+    </div>
+
+    <script>
+        // 自动刷新功能
+        let countdown = 30;
+        const countdownElement = document.getElementById('refresh-countdown');
+
+        function updateCountdown() {
+            countdown--;
+            countdownElement.textContent = `${countdown}秒后刷新`;
+
+            if (countdown <= 0) {
+                location.reload(); // 刷新页面
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        // 类别切换功能
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                categoryItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // 分页按钮功能
+        const pageButtons = document.querySelectorAll('.pagination button:not(:first-child):not(:last-child)');
+        pageButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                pageButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
