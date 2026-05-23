@@ -3,16 +3,18 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error
 
-data = pd.read_csv(r"D:\machineL\ml-test\review\test_data\regression_samples.csv")
+
+data = pd.read_csv(r"E:\python_files\ml-test\review\test_data\synthetic_data.csv")
 
 X = data.iloc[:,0]
 y = data.iloc[:,1]
 
-degree = [3,5,10]
+degree = [1,5,15]
 fig,axes = plt.subplots(2,2,figsize=(10,10))
 ax = axes.flatten()
-sse_array = []
+mse_array = []
 
 model_score = {}
 for i,degree in enumerate(degree):
@@ -20,9 +22,9 @@ for i,degree in enumerate(degree):
     func = np.poly1d(coeffs)
     y_pred = func(X)
 
-    r = y_pred - y
-    sse_array.append(np.sum(np.square(r)))
-    model_score[degree] = sse_array[i]
+
+    mse_array.append(mean_squared_error(y_true=y,y_pred=y_pred))
+    model_score[degree] = mse_array[i]
 
     ax[i].scatter(X,y,marker='*',c='r')
     ax[i].plot(X,y_pred,label="Predicted")
