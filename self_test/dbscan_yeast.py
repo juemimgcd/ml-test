@@ -5,7 +5,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 data = pd.read_csv(r"D:\machineL\ml-test\review\test_data\yeast.csv")
 X = data.iloc[:,1:-1]
 y = data.iloc[:,-1]
